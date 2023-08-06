@@ -52,7 +52,7 @@ moda_vector
 
 ``` r
 library(readr)
-SAT_car <- read_delim("~/Desktop/UFM/INE_PARQUE_VEHICULAR_080219.txt", delim ="|")
+SAT_car <- read_delim("~/Desktop/UFM/Sexto Semestre/Data Wrangling/INE_PARQUE_VEHICULAR_080219.txt", delim ="|")
 ```
 
     ## New names:
