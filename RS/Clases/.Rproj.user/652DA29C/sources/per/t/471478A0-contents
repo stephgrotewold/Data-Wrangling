@@ -1,0 +1,60 @@
+library(shiny)
+
+function(input, output, session) {
+  #numeric unput
+  output$ni1_out <- renderPrint({
+    print(input$ni1)
+    str(input$ni1)
+  })
+  
+  # Single Slider input
+  output$si1_out <- renderPrint({
+    print(input$si1)
+    str(input$si1)
+  })
+  # Range Slider input
+  output$si2_out <- renderPrint({
+    print(input$si2)
+    str(input$si2)
+  })
+  
+  #Date input
+  output$dri_out <- renderPrint({
+    print(input$dri)
+    str(input$dri)
+  })
+  
+
+ 
+  
+
+  output$ssi1_out <- renderPrint({
+    print(input$ssi1)
+    str(input$ssi1)
+  })
+  
+  output$msi1_out <- renderPrint({
+    print(input$msi1)
+    str(input$msi1)
+  })
+  
+
+  output$scb1_out <- renderPrint({
+    print(input$scb1)
+    str(input$scb1)
+  })
+  
+
+  output$cbg1_out <- renderPrint({
+    print(input$cbg1)
+    str(input$cbg1)
+  })
+  
+  output$boton1_out <- renderPrint({
+    print(input$boton1)
+    str(input$boton1)
+  })
+  
+  
+
+}

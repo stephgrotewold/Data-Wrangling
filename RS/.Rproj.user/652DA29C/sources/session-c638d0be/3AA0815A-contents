@@ -1,0 +1,6 @@
+library(readxl)
+library(readr)
+library(tidyverse)
+library(tidytext)
+
+
