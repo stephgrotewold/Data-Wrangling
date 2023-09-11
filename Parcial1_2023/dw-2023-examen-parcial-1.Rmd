@@ -135,6 +135,9 @@ Extra: ¿Cuántos posibles exámenes de 5 preguntas se pueden realizar utilizand
 (responder con código de R.)
 
 ```{r}
+#Calcular el número de combinaciones posibles
+combinaciones_posibles <- choose(10,5)
+combinaciones_posibles
 
 ```
 
@@ -178,6 +181,8 @@ B. Estrategia de negocio ha decidido que ya no operará en aquellos territorios 
 causado. Llevando a una perdida de: -14,985.02
 
 ```{r}
+
+library(dplyr)
 #Filtrar las filas con ventas negativas
 ventas_negativas <- data %>%
   filter(Venta < 0)

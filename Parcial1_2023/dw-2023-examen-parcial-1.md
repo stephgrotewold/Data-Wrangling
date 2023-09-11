@@ -177,6 +177,14 @@ Extra: ¿Cuántos posibles exámenes de 5 preguntas se pueden realizar
 utilizando como banco las diez acá presentadas? (responder con código de
 R.)
 
+``` r
+#Calcular el número de combinaciones posibles
+combinaciones_posibles <- choose(10,5)
+combinaciones_posibles
+```
+
+    ## [1] 252
+
 ## Sección II Preguntas prácticas. (30pts)
 
 - Conteste las siguientes preguntas utilizando sus conocimientos de R.
@@ -251,6 +259,21 @@ territorios cuyas pérdidas sean “considerables”. Bajo su criterio,
 este caso se encontro que el territorio con mayor perdida es f7dfc635,
 este es el que más ventas negativas (se asume que son devoluciones) a
 causado. Llevando a una perdida de: -14,985.02
+
+``` r
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
 
 ``` r
 #Filtrar las filas con ventas negativas
