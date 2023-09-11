@@ -1,0 +1,288 @@
+dw-2023-parcial-1
+================
+Tepi
+9/11/2023
+
+# Examen parcial
+
+Indicaciones generales:
+
+- Usted tiene el período de la clase para resolver el examen parcial.
+
+- La entrega del parcial, al igual que las tareas, es por medio de su
+  cuenta de github, pegando el link en el portal de MiU.
+
+- Pueden hacer uso del material del curso e internet (stackoverflow,
+  etc.). Sin embargo, si encontramos algún indicio de copia, se anulará
+  el exámen para los estudiantes involucrados. Por lo tanto, aconsejamos
+  no compartir las agregaciones que generen.
+
+## Sección 0: Preguntas de temas vistos en clase (20pts)
+
+- Responda las siguientes preguntas de temas que fueron tocados en
+  clase.
+
+1.  ¿Qué es una ufunc y por qué debemos de utilizarlas cuando
+    programamos trabajando datos?
+
+- esta es una función universal, esto sirve para que la funcion pueda
+  usarse para cada elemento de un vector sin tener que hacer loops.
+  Estan deben usarse porque hace que el codigo tenga una menor
+  complejidad cuando se utiliza para dataset muy grandes, en si optimiza
+  el rendimiento.
+
+2.  Es una técnica en programación numérica que amplía los objetos que
+    son de menor dimensión para que sean compatibles con los de mayor
+    dimensión. Describa cuál es la técnica y de un breve ejemplo en R.
+
+- Esta tecnica se llama broadcasting, esta permite que se hagan
+  operaciones entre vectores de diferentes dimensiones. Esto hace que
+  los elementos del vector más pequeño sean transmitidos para que sean
+  compatibles con el array más grande.
+
+\#Crear un vector vector1 \<- c(1, 2, 3) \#Crear una matriz vector2 \<-
+matrix(1:9, nrow = 3)
+
+\#Sumar el vector a cada fila de la matriz (broadcasting) result \<-
+vector1 + vector2
+
+3.  ¿Qué es el axioma de elegibilidad y por qué es útil al momento de
+    hacer análisis de datos?
+
+- Este axioma nos dice que para que nuestro conjunto de datos sea valido
+  para poder analizarlo, estos datos deben de cumplir con ciertos
+  criterios. Esto es util porque nos permite asegurarnos que los datos
+  utlizados sean representativos de la poblacion, que es lo que se busca
+  con el analisis para evitar sesgos.
+
+4.  Cuál es la relación entre la granularidad y la agregación de datos?
+    Mencione un breve ejemplo. Luego, exploque cuál es la granularidad o
+    agregación requerida para poder generar un reporte como el
+    siguiente:
+
+| Pais | Usuarios |
+|------|----------|
+| US   | 1,934    |
+| UK   | 2,133    |
+| DE   | 1,234    |
+| FR   | 4,332    |
+| ROW  | 943      |
+
+\*Para poder generar este reporte, la granularidad deberia de ser a
+nivel de pais. Esto porque muestra el numero de usuarios por pais. Por
+lo tanto los datos que se usan en este caso seria: pais de cada usuario
+y el numero de usarios por pais. Estos pueden venir de varios data sets.
+
+La granularidad de datos hace referencia al nivel de detalle con el que
+se representan los datos, mientras que la agregacion de datos se refiere
+al proceso de combinar datos de diferentes data sets o de diferente
+granularidad para crear un data set más conciso. La relación entre estos
+dos es que la agregacion puede hacer que la granularidad disminiuya, se
+podria ver como si en un data set de entradas por horas se agregan
+entradas por dia, entonces en lugar de la granularidad ser por hora
+ahora seria por dia. \| Hora \| Entradas \| \|——\|———-\| \| 09:00 \| 100
+\| \| 11:00 \| 200 \| \| 13:00 \| 300 \|
+
+-\> \| Día \| Entradas \| \|—–\|——–\| \| 1 \| 600 \| \| 2 \| 900 \|
+
+## Sección I: Preguntas teóricas. (50pts)
+
+- Existen 10 preguntas directas en este Rmarkdown, de las cuales usted
+  deberá responder 5. Las 5 a responder estarán determinadas por un
+  muestreo aleatorio basado en su número de carné.
+
+- Ingrese su número de carné en `set.seed()` y corra el chunk de R para
+  determinar cuáles preguntas debe responder.
+
+``` r
+set.seed("20210567") 
+v<- 1:10
+preguntas <-sort(sample(v, size = 5, replace = FALSE ))
+
+paste0("Mis preguntas a resolver son: ",paste0(preguntas,collapse = ", "))
+```
+
+    ## [1] "Mis preguntas a resolver son: 2, 4, 7, 8, 9"
+
+``` r
+# "Mis preguntas a resolver son: 2, 4, 7, 8, 9"
+```
+
+### Listado de preguntas teóricas
+
+\[1\] “Mis preguntas a resolver son: 2, 4, 7, 8, 9”
+
+1.  Para las siguientes sentencias de `base R`, liste su contraparte de
+    `dplyr`:
+    - `str()`
+    - `df[,c("a","b")]`
+    - `names(df)[4] <- "new_name"` donde la posición 4 corresponde a la
+      variable `old_name`
+    - `df[df$variable == "valor",]`
+2.  Al momento de filtrar en SQL, ¿cuál keyword cumple las mismas
+    funciones que el keyword `OR` para filtrar uno o más elementos una
+    misma columna?
+
+- En este caso podria ser IN porque esta se puede usar para especificar
+  que un valor debe estar contenido dentro de cierto conjunto de
+  valores.
+
+3.  ¿Por qué en R utilizamos funciones de la familia apply
+    (lapply,vapply) en lugar de utilizar ciclos?
+4.  ¿Cuál es la diferencia entre utilizar `==` y `=` en R?
+
+- La diferencia entre == y = es que al colocar solo = le estamos
+  asignando un valor a esta variable mientras que == es utilizado para
+  hacer una comparacion entre dos valores para ver si este es igual o
+  no.
+
+5.  ¿Cuál es la forma correcta de cargar un archivo de texto donde el
+    delimitador es `:`?
+6.  ¿Qué es un vector y en qué se diferencia en una lista en R?
+7.  ¿Qué pasa si quiero agregar una nueva categoría a un factor que no
+    se encuentra en los niveles existentes?
+
+- En este caso, se podria utilizar levels ya que esta funcion devuelve
+  un vector con los niveles de un factor. Si se quiere agregar alguna
+  otra categoria entonces e utiliza el c() para poder concat el vector
+  de nieveles. Otra manera puede ser el factor(), esta requiere de un
+  vector de valores y el orden de dichos los determina los niveles del
+  factor
+
+8.  Si en un dataframe, a una variable de tipo `factor` le agrego un
+    nuevo elemento que *no se encuentra en los niveles existentes*,
+    ¿cuál sería el resultado esperado y por qué?
+    - El nuevo elemento
+    - `NA`
+
+- El resultado seria que el nuevo elemento se agregara como un nuevo
+  nivel. Al ser una variable categorica puede tener n niveles, por lo
+  tanto cuando no encuentra el nivel esta funcion lo agrega.
+
+9.  En SQL, ¿para qué utilizamos el keyword `HAVING`?
+
+- Este se utiliza para filtrar resultados basada en los valores de las
+  funciones de agregracion, obtener un resumen de los datos o
+  identificar tendencias en los datos. Esta se parece un poco al where y
+  puede ir con el Group By u Order By.s
+
+10. Si quiero obtener como resultado las filas de la tabla A que no se
+    encuentran en la tabla B, ¿cómo debería de completar la siguiente
+    sentencia de SQL?
+
+    - SELECT \* FROM A \_\_\_\_\_\_\_ B ON A.KEY = B.KEY WHERE
+      \_\_\_\_\_\_\_\_\_\_ = \_\_\_\_\_\_\_\_\_\_
+
+Extra: ¿Cuántos posibles exámenes de 5 preguntas se pueden realizar
+utilizando como banco las diez acá presentadas? (responder con código de
+R.)
+
+## Sección II Preguntas prácticas. (30pts)
+
+- Conteste las siguientes preguntas utilizando sus conocimientos de R.
+  Adjunte el código que utilizó para llegar a sus conclusiones en un
+  chunk del markdown.
+
+A. De los clientes que están en más de un país,¿cuál cree que es el más
+rentable y por qué? El cliente más rentable es a17a7558 ya que fue el
+que mayor ganancia a dado con un monto de: 19,817.7
+
+``` r
+library(readr)
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+data <- readRDS("parcial_anonimo.rds")
+str(data)
+```
+
+    ## Classes 'data.table' and 'data.frame':   226236 obs. of  11 variables:
+    ##  $ DATE           : POSIXct, format: "2018-12-01" "2018-11-01" ...
+    ##  $ Codigo Material: chr  "637caff5" "637caff5" "637caff5" "637caff5" ...
+    ##  $ Descripcion    : chr  "0cf3ec3d" "0cf3ec3d" "0cf3ec3d" "0cf3ec3d" ...
+    ##  $ Pais           : chr  "4046ee34" "4046ee34" "4046ee34" "4046ee34" ...
+    ##  $ Distribuidor   : chr  "9a47575c" "9a47575c" "9a47575c" "9a47575c" ...
+    ##  $ Territorio     : chr  "69c1b705" "69c1b705" "69c1b705" "69c1b705" ...
+    ##  $ Cliente        : chr  "9d6e1d65" "9d6e1d65" "9d6e1d65" "9d6e1d65" ...
+    ##  $ Marca          : chr  "61d7fbfc" "61d7fbfc" "61d7fbfc" "61d7fbfc" ...
+    ##  $ Canal Venta    : chr  "7b48292e" "7b48292e" "7b48292e" "7b48292e" ...
+    ##  $ Unidades plaza : num  2 0 3 3 8 3 0 3 6 10 ...
+    ##  $ Venta          : num  26.5 0 39.8 39.8 106 ...
+    ##  - attr(*, ".internal.selfref")=<externalptr>
+
+``` r
+#Filtrar los clientes que están en más de un país
+clientes_multipais <- data %>%
+  group_by(Cliente) %>%
+  filter(n_distinct(Pais) > 1) %>%
+  ungroup()
+
+#Calcular las ganancias totales por cliente
+ganancias_por_cliente <- clientes_multipais %>%
+  group_by(Cliente) %>%
+  summarise(ganancias_totales = sum(Venta))
+
+#Encontrar al cliente más rentable
+cliente_mas_rentable <- ganancias_por_cliente %>%
+  slice_max(order_by = ganancias_totales, n = 1)
+cliente_mas_rentable
+```
+
+    ## # A tibble: 1 × 2
+    ##   Cliente  ganancias_totales
+    ##   <chr>                <dbl>
+    ## 1 a17a7558            19818.
+
+B. Estrategia de negocio ha decidido que ya no operará en aquellos
+territorios cuyas pérdidas sean “considerables”. Bajo su criterio,
+¿cuáles son estos territorios y por qué ya no debemos operar ahí? \* En
+este caso se encontro que el territorio con mayor perdida es f7dfc635,
+este es el que más ventas negativas (se asume que son devoluciones) a
+causado. Llevando a una perdida de: -14,985.02
+
+``` r
+#Filtrar las filas con ventas negativas
+ventas_negativas <- data %>%
+  filter(Venta < 0)
+
+#Agrupar por territorio y calcular la suma de ventas negativas
+territorios_con_ventas_negativas <- ventas_negativas %>%
+  group_by(Territorio) %>%
+  summarise(Suma_Ventas_Negativas = sum(Venta))
+
+#Encontrar el territorio con la suma de ventas negativas más baja
+territorio_con_ventas_negativas <- territorios_con_ventas_negativas %>%
+  filter(Suma_Ventas_Negativas == min(Suma_Ventas_Negativas))
+territorio_con_ventas_negativas
+```
+
+    ## # A tibble: 1 × 2
+    ##   Territorio Suma_Ventas_Negativas
+    ##   <chr>                      <dbl>
+    ## 1 f7dfc635                 -14985.
+
+### I. Preguntas teóricas
+
+## A
+
+``` r
+###resuelva acá
+```
+
+## B
+
+``` r
+###resuelva acá
+```

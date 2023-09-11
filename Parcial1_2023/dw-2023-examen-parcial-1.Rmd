@@ -25,10 +25,20 @@ Indicaciones generales:
 utiliza para dataset muy grandes, en si optimiza el rendimiento. 
 
 2. Es una técnica en programación numérica que amplía los objetos que son de menor dimensión para que sean compatibles con los de mayor dimensión. Describa cuál es la técnica y de un breve ejemplo en R.
-* Esta tecnica se llama broadcasting, esta permite que se hagan operaciones entre vectores 
-La técnica que describe se llama "broadcasting". Broadcasting es una técnica en programación numérica que permite operar entre arrays de diferentes formas de manera eficiente y coherente. Cuando se realiza una operación entre dos arrays de diferentes dimensiones, NumPy en Python (y R de manera similar) "transmite" automáticamente los elementos del array más pequeño para que sean compatibles con el array más grande.
+* Esta tecnica se llama broadcasting, esta permite que se hagan operaciones entre vectores de diferentes dimensiones. Esto hace que los elementos del vector más pequeño sean transmitidos para que sean compatibles con el array más grande.
+
+#Crear un vector
+vector1 <- c(1, 2, 3)
+#Crear una matriz
+vector2 <- matrix(1:9, nrow = 3)
+
+#Sumar el vector a cada fila de la matriz (broadcasting)
+result <- vector1 + vector2
+
 
 3. ¿Qué es el axioma de elegibilidad y por qué es útil al momento de hacer análisis de datos? 
+* Este axioma nos dice que para que nuestro conjunto de datos sea valido para poder analizarlo, estos datos deben de cumplir con ciertos criterios. Esto es util porque nos permite asegurarnos que los datos utlizados sean representativos de la poblacion, que es lo que se busca con el analisis para evitar sesgos.
+
 
 4. Cuál es la relación entre la granularidad y la agregación de datos? Mencione un breve ejemplo. Luego, exploque cuál es la granularidad o agregación requerida para poder generar un reporte como el siguiente:
 
@@ -40,7 +50,23 @@ La técnica que describe se llama "broadcasting". Broadcasting es una técnica e
 |FR   | 4,332    |
 |ROW  | 943      |
 
+*Para poder generar este reporte, la granularidad deberia de ser a nivel de pais. Esto porque muestra el numero de usuarios por pais. Por lo tanto los datos que se usan en este caso seria: pais de cada usuario y el numero de usarios por pais. Estos pueden venir de varios data sets.
 
+
+ La granularidad de datos hace referencia al nivel de detalle con el que se representan los datos, mientras que la agregacion de datos se
+refiere al proceso de combinar datos de diferentes data sets o de diferente granularidad para crear un data set más conciso. La relación entre estos dos es que la agregacion puede hacer que la granularidad disminiuya, se podria ver como si en un data set de entradas por horas se agregan
+entradas por dia, entonces en lugar de la granularidad ser por hora ahora seria por dia. 
+| Hora | Entradas |
+|------|----------|
+| 09:00 | 100 |
+| 11:00 | 200 |
+| 13:00 | 300 |
+
+-> 
+| Día | Entradas |
+|-----|--------|
+| 1 | 600 |
+| 2 | 900 |
 
 ## Sección I: Preguntas teóricas. (50pts)
 
@@ -51,16 +77,19 @@ La técnica que describe se llama "broadcasting". Broadcasting es una técnica e
 
 ```{r, echo=TRUE, cache=TRUE}
 
-#set.seed("escriba acá su carné") 
+set.seed("20210567") 
 v<- 1:10
 preguntas <-sort(sample(v, size = 5, replace = FALSE ))
 
 paste0("Mis preguntas a resolver son: ",paste0(preguntas,collapse = ", "))
+# "Mis preguntas a resolver son: 2, 4, 7, 8, 9"
 
 ```
 
 
 ### Listado de preguntas teóricas
+
+[1] "Mis preguntas a resolver son: 2, 4, 7, 8, 9"
 
 1. Para las siguientes sentencias de `base R`, liste su contraparte de `dplyr`:
     * `str()`
@@ -70,21 +99,45 @@ paste0("Mis preguntas a resolver son: ",paste0(preguntas,collapse = ", "))
     
     
 2. Al momento de filtrar en SQL, ¿cuál keyword cumple las mismas funciones que el keyword `OR`  para filtrar uno o más elementos una misma columna?
+* En este caso podria ser IN porque esta se puede usar para especificar que un valor debe estar contenido dentro de cierto conjunto de valores.
+
+
 3. ¿Por qué en R utilizamos funciones de la familia apply (lapply,vapply) en lugar de utilizar ciclos?
 4. ¿Cuál es la diferencia entre utilizar `==` y `=` en R?
+* La diferencia entre == y = es que al colocar solo = le estamos asignando un valor a esta variable mientras que == es utilizado para hacer una 
+comparacion entre dos valores para ver si este es igual o no. 
+
 5. ¿Cuál es la forma correcta de cargar un archivo de texto donde el delimitador es `:`?
 6. ¿Qué es un vector y en qué se diferencia en una lista en R?
 7. ¿Qué pasa si quiero agregar una nueva categoría a un factor que no se encuentra en los niveles existentes?
+*  En este caso, se podria utilizar levels ya que esta funcion devuelve un vector con los
+niveles de un factor. Si se quiere agregar alguna otra categoria entonces e utiliza el c() para poder concat el vector de nieveles. 
+Otra manera puede ser el factor(), esta requiere de un vector de valores y el orden de dichos los determina los niveles del factor
+
 8. Si en un dataframe, a una variable de tipo `factor` le agrego un nuevo elemento que *no se encuentra en los niveles existentes*, ¿cuál sería el resultado esperado y por qué?
     * El nuevo elemento
     * `NA`
+  
+  * El resultado seria que el nuevo elemento se agregara como un nuevo nivel. Al ser una 
+  variable categorica puede tener n niveles, por lo tanto cuando no encuentra el nivel esta
+  funcion lo agrega.
+  
 9. En SQL, ¿para qué utilizamos el keyword `HAVING`?
+* Este se utiliza para filtrar resultados  basada en los valores de las funciones de 
+agregracion, obtener un resumen de los datos o identificar tendencias en los datos. Esta
+se parece un poco al where y puede ir con el Group By u Order By.s
+
 10. Si quiero obtener como resultado las filas de la tabla A que no se encuentran en la tabla B, ¿cómo debería de completar la siguiente sentencia de SQL?
 
     * SELECT * FROM A _______ B ON A.KEY = B.KEY WHERE __________ = __________
   
 Extra: ¿Cuántos posibles exámenes de 5 preguntas se pueden realizar utilizando como banco las diez acá presentadas?
 (responder con código de R.)
+
+```{r}
+
+```
+
 
 
 ## Sección II Preguntas prácticas. (30pts)
@@ -93,8 +146,53 @@ Extra: ¿Cuántos posibles exámenes de 5 preguntas se pueden realizar utilizand
 * Conteste las siguientes preguntas utilizando sus conocimientos de R. Adjunte el código que utilizó para llegar a sus conclusiones en un chunk del markdown.
 
 A. De los clientes que están en más de un país,¿cuál cree que es el más rentable y por qué?
+El cliente más rentable es a17a7558 ya que fue el que mayor ganancia a dado con un monto de: 19,817.7	
+
+```{r, cache=TRUE}
+library(readr)
+library(dplyr)
+
+data <- readRDS("parcial_anonimo.rds")
+str(data)
+#Filtrar los clientes que están en más de un país
+clientes_multipais <- data %>%
+  group_by(Cliente) %>%
+  filter(n_distinct(Pais) > 1) %>%
+  ungroup()
+
+#Calcular las ganancias totales por cliente
+ganancias_por_cliente <- clientes_multipais %>%
+  group_by(Cliente) %>%
+  summarise(ganancias_totales = sum(Venta))
+
+#Encontrar al cliente más rentable
+cliente_mas_rentable <- ganancias_por_cliente %>%
+  slice_max(order_by = ganancias_totales, n = 1)
+cliente_mas_rentable
+
+```
+
 
 B. Estrategia de negocio ha decidido que ya no operará en aquellos territorios cuyas pérdidas sean "considerables". Bajo su criterio, ¿cuáles son estos territorios y por qué ya no debemos operar ahí?
+* En este caso se encontro que el territorio con mayor perdida es f7dfc635, este es el que más ventas negativas (se asume que son devoluciones) a 
+causado. Llevando a una perdida de: -14,985.02
+
+```{r}
+#Filtrar las filas con ventas negativas
+ventas_negativas <- data %>%
+  filter(Venta < 0)
+
+#Agrupar por territorio y calcular la suma de ventas negativas
+territorios_con_ventas_negativas <- ventas_negativas %>%
+  group_by(Territorio) %>%
+  summarise(Suma_Ventas_Negativas = sum(Venta))
+
+#Encontrar el territorio con la suma de ventas negativas más baja
+territorio_con_ventas_negativas <- territorios_con_ventas_negativas %>%
+  filter(Suma_Ventas_Negativas == min(Suma_Ventas_Negativas))
+territorio_con_ventas_negativas
+```
+
 
 
 
