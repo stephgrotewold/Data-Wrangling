@@ -411,6 +411,17 @@ ggplot(resultados, aes(x = Tipo)) +
   scale_fill_manual(values = c("Facturación" = "blue", "Costos" = "red")) +
   theme_minimal()
 
+# Crear una tabla de frecuencia de la columna "Tipo"
+frecuencia_tipos <- table(data$Tipo)
+
+# Convertir la tabla de frecuencia en un data frame
+df_frecuencia_tipos <- as.data.frame(frecuencia_tipos)
+
+# Nombrar las columnas para que sean más descriptivas
+colnames(df_frecuencia_tipos) <- c("Tipo", "Frecuencia")
+
+# Mostrar la tabla de frecuencia
+print(df_frecuencia_tipos)
 
 
 
